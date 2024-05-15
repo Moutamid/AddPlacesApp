@@ -15,6 +15,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        setProperty("archivesBaseName", "AddPlacesApp-$versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,4 +51,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
+
 }

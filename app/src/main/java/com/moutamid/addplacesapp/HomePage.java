@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.moutamid.addplacesapp.Helper.Config;
 
 import java.util.ArrayList;
 
@@ -32,14 +33,7 @@ ArrayList<MapInfoModel> arrayList;
         setContentView(R.layout.activity_home_page);
         ImageView img = findViewById(R.id.addbtn);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        db=FirebaseFirestore.getInstance();
-        arrayList= new ArrayList<MapInfoModel>();
-        myAdapter= new MyAdapter(HomePage.this,arrayList);
-        recyclerView.setAdapter(myAdapter);
-        EventChangeListner();
+        Config.checkApp(HomePage.this);
 
 
         img.setOnClickListener(new View.OnClickListener() {
@@ -51,23 +45,4 @@ ArrayList<MapInfoModel> arrayList;
         });
     }
 
-    private void EventChangeListner() {
-        db.collection("mappdetails").orderBy("name", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null){
-                            Log.e("Firestore Error", error.getMessage());
-                            return;
-                        }
-                        for (DocumentChange dc: value.getDocumentChanges()){
-                            if(dc.getType() == DocumentChange.Type.ADDED){
-                                arrayList.add(dc.getDocument().toObject(MapInfoModel.class));
-                            }
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-
-    }
 }

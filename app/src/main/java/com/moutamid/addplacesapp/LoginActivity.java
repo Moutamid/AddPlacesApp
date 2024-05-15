@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
-    private TextView btnSignup, btnReset;
+    private TextView btnSignup;
     Button btnLogin;
 
     @Override
@@ -49,29 +49,19 @@ public class LoginActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomePage.class));
             finish();
-
         }
-        // set the view now
         setContentView(R.layout.activity_login);
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         Animation bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
-
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (TextView) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (TextView) findViewById(R.id.btn_reset_password);
         LinearLayout main_layout = findViewById(R.id.main_layout);
         main_layout.setAnimation(bottomAnim);
-
         auth = FirebaseAuth.getInstance();
-
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                                Stash.put("password", password);
                                             show_toast("Successfully Login", 1);
                                             lodingbar.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, HomePage.class);
                                             startActivity(intent);
                                             finish();
                                         }

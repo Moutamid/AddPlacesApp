@@ -18,10 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,8 +28,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moutamid.addplacesapp.model.UserModel;
-
 import java.util.Objects;
+
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -48,8 +46,6 @@ public class SignupActivity extends AppCompatActivity {
         Animation bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
         LinearLayout main_layout = findViewById(R.id.main_layout);
         main_layout.setAnimation(bottomAnim);
-
-
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         inputName = (EditText) findViewById(R.id.name);
@@ -130,7 +126,7 @@ public class SignupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             show_toast("Account is created successfully", 1);
-                                            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                            startActivity(new Intent(SignupActivity.this, HomePage.class));
                                             lodingbar.dismiss();
                                             finishAffinity();
 

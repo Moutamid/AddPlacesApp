@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ly8white"
-    tools:context=".Welcome">
+>
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,11 +38,9 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="212dp"
+        android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="104dp"
+android:layout_centerHorizontal="true"        android:layout_alignParentBottom="true"
         android:layout_marginBottom="566dp"
         android:text="Need!"
         android:fontFamily="@font/kanit_bold"
@@ -53,12 +51,11 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="530dp"
+
+        android:layout_centerHorizontal="true"          android:layout_marginBottom="530dp"
         android:text="Find your way, discover new places"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -69,9 +66,8 @@
         android:id="@+id/startbtn"
         android:layout_width="187dp"
         android:layout_height="61dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="113dp"
+
+        android:layout_centerHorizontal="true"          android:layout_alignParentBottom="true"
         android:layout_marginBottom="464dp"
         android:backgroundTint="@color/yellow"
         android:text="Let's go!"
