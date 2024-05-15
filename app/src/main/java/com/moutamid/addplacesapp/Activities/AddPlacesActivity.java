@@ -97,8 +97,6 @@ public class AddPlacesActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 category = spinner.getItemAtPosition(i).toString();
-                Toast.makeText(AddPlacesActivity.this, "category" + category, Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

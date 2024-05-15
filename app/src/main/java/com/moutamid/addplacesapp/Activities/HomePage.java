@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +23,7 @@ FirebaseFirestore db;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        ImageView img = findViewById(R.id.addbtn);
+        Button img = findViewById(R.id.btnAdd);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         Config.checkApp(HomePage.this);
         img.setOnClickListener(new View.OnClickListener() {

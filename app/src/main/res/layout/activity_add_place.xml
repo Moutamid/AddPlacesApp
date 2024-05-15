@@ -197,7 +197,7 @@ android:visibility="gone"
             android:backgroundTint="@color/black"
             android:background="@drawable/roundbutton"
             android:fontFamily="@font/kanit_regular"
-            android:text="Add new location"
+            android:text="Add location"
             android:textAllCaps="true"
 
             android:layout_marginBottom="@dimen/_20sdp"
