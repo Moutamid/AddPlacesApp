@@ -1,4 +1,4 @@
-package com.moutamid.addplacesapp;
+package com.moutamid.addplacesapp.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.moutamid.addplacesapp.R;
 import com.moutamid.addplacesapp.model.UserModel;
 import java.util.Objects;
 

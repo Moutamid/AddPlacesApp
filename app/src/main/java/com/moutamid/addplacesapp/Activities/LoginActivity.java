@@ -1,4 +1,4 @@
-package com.moutamid.addplacesapp;
+package com.moutamid.addplacesapp.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.addplacesapp.R;
 
 import java.util.Objects;
 
