@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -118,13 +120,13 @@ public class AddPlacesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress())
-                    Toast.makeText(AddPlacesActivity.this, "Upload Is In Progress", Toast.LENGTH_SHORT).show();
+                    show_toast("Upload is in progress", 1);
                 else if (name.getText().toString().isEmpty() || productDescription.getText().toString().isEmpty() || imgUri == null) {
                     Toast.makeText(AddPlacesActivity.this, "Please fill blank fields", Toast.LENGTH_SHORT).show();
+
                 } else {
                     uploadData();
-                    Toast.makeText(AddPlacesActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    Toast.makeText(AddPlacesActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -133,14 +135,15 @@ public class AddPlacesActivity extends AppCompatActivity {
 
 
     public void uploadData() {
-        if (name.getText().toString().isEmpty() || productDescription.getText().toString().isEmpty() || imgUri == null) {
-            Toast.makeText(AddPlacesActivity.this, "Please fill blank fields", Toast.LENGTH_SHORT).show();
+        if (Config.lat == 0.0 || name.getText().toString().isEmpty() || productDescription.getText().toString().isEmpty() || imgUri == null) {
+            Toast.makeText(AddPlacesActivity.this, "Please fill blank fields and locations", Toast.LENGTH_SHORT).show();
         } else {
             uploadImage();
         }
     }
 
     public void uploadImage() {
+
         if (imgUri != null) {
             StorageReference fileReference = mStorageRef.child(name.getText().toString() + "." + getFileExtension(imgUri));
             mUploadTask = fileReference.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -150,17 +153,24 @@ public class AddPlacesActivity extends AppCompatActivity {
                     Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!urlTask.isSuccessful()) ;
                     Uri downloadUrl = urlTask.getResult();
+                    DatabaseReference z = FirebaseDatabase.getInstance().getReference().child("AddPlacesApp")
+                            .child("Places");
+                    String key = z.push().getKey().toString();
                     LocationModel product = new LocationModel(name.getText().toString().trim(),
                             productDescription.getText().toString().trim(),
-                            downloadUrl.toString(), category, Config.lat, Config.lng);
-                    DatabaseReference z = FirebaseDatabase.getInstance().getReference().child("AddPlacesApp")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .child("Places");
-                    z.push().setValue(product);
+                            downloadUrl.toString(), category, editTextLat.getText().toString().trim(), editTextLng.getText().toString().trim(), key);
+                    z.child(key).setValue(product);
+                    Config.lat = 0.0;
+                    Config.lng = 0.0;
+                    startActivity(new Intent(AddPlacesActivity.this, HomePage.class));
+
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    Config.lat = 0.0;
+                    Config.lng = 0.0;
                     Toast.makeText(AddPlacesActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -213,5 +223,27 @@ public class AddPlacesActivity extends AppCompatActivity {
             editTextLat.setText(String.valueOf(Config.lat));
 
         }
+    }
+
+    public void show_toast(String message, int type) {
+        LayoutInflater inflater = getLayoutInflater();
+
+        View layout;
+        if (type == 0) {
+            layout = inflater.inflate(R.layout.toast_wrong,
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
+        } else {
+            layout = inflater.inflate(R.layout.toast_right,
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        }
+        TextView text = (TextView) layout.findViewById(R.id.text);
+        text.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

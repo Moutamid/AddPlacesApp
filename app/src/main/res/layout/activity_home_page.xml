@@ -35,16 +35,10 @@
         android:layout_marginBottom="@dimen/_20sdp"
         android:textColor="@color/yellow" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <fragment
+        android:id="@+id/map_fragment"
+
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_below="@+id/homepage"
-        android:layout_margin="@dimen/_10sdp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
+        android:layout_height="match_parent" />
 </RelativeLayout>

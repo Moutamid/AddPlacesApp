@@ -16,6 +16,8 @@ import java.net.URL;
 public class Config {
     public static double lat=0.0;
     public static double lng=0.0;
+    public static double current_lat=0.0;
+    public static double current_lng=0.0;
 
 
     public static void checkApp(Activity activity) {

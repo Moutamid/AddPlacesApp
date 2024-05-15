@@ -118,9 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String name = snapshot.child("name").getValue().toString();
-//                                                String password = snapshot.child("password").getValue().toString();
                                             Stash.put("name", name);
-//                                                Stash.put("password", password);
                                             show_toast("Successfully Login", 1);
                                             lodingbar.dismiss();
                                             Intent intent = new Intent(LoginActivity.this, HomePage.class);
